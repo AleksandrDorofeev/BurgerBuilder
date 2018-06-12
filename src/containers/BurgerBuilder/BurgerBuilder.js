@@ -1,13 +1,38 @@
 import React, { Component } from 'react';
 
-import Aux from '../../hoc/Fragment'
+import Aux from '../../hoc/Fragment';
+import Burger from '../../components/Burger/Burger';
+import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 
 class BurgerBuilder extends Component {
+state = {
+  ingredients: {
+    salad: 0,
+    bacon: 0,
+    meat: 0
+  },
+  totalPrice: 4
+}
+
+addIngredientHandler = (type) => {
+  const oldCount = this.tate.ingredients[type];
+  const updatedCount = oldCount + 1;
+  const updatedIngredients = {
+    ...this.state.ingredients
+  };
+  updatedIngredients[type] = updatedCount;
+  
+}
+
+removeIngredientHandler = (type) => {
+
+}
+
   render() {
     return (
       <Aux>
-        <div>Burger</div>
-        <div>Controls</div>
+        <Burger ingredients={this.state.ingredients}/>
+        <BuildControls />
       </Aux>
     )
   }
