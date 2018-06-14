@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import Modal from '../../components/UI/Modal/Modal';
 import Aux from '../Fragment/Fragment';
-import { isNullOrUndefined } from 'util';
 
 const withErrorHandler = (WrappedComponent, axios) => {
   return class extends Component {
@@ -10,14 +9,19 @@ const withErrorHandler = (WrappedComponent, axios) => {
       error: null
     }
 
-    componentDidMount() {
-      axios.interceptors.request.use(request => {
+    componentWillMount() {
+      this.reqInterseptor = axios.interceptors.request.use(request => {
         this.setState({error: null})
         return request;
       });
-      axios.interceptors.response.use(res => res, error => {
+      this.resInterseptor = axios.interceptors.response.use(res => res, error => {
         this.setState({error: error})
       });
+    }
+
+    componentWillUnmount() {
+      axios.interceptors.request.eject(this.reqInterseptor);
+      axios.interceptors.response.eject(this.resInterseptor);
     }
 
     errorConfirmHandler = () => {
