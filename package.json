@@ -93,6 +93,7 @@
     "extends": "react-app"
   },
   "devDependencies": {
-    "prop-types": "^15.6.1"
+    "prop-types": "^15.6.1",
+    "react-router-dom": "^4.3.1"
   }
 }
